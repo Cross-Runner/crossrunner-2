@@ -7,11 +7,8 @@ const MAX_JUMPS = 2
 var jumps_left = MAX_JUMPS
 
 # --- REFERENCES TO NODES ---
-# Make sure these nodes exist as CHILDREN of your player!
 @onready var anim = $AnimatedSprite2D
 @onready var coin_label = %Label
-
-# These lines use "$sfx_attack" which means "Look for a child node named sfx_attack"
 @onready var sfx_attack = $sfx_attack
 @onready var sfx_jump = $sfx_jump
 @onready var sfx_coin = $sfx_coin
@@ -23,7 +20,20 @@ var jumps_left = MAX_JUMPS
 var is_attacking = false
 var coin_counter = 0
 
+# --- ADDED DEATH VARIABLES AND REFERENCES ---
+# Set the Y value where falling kills the player (Adjust this in the inspector/editor)
+@export var death_y_level: float = 600.0 
+# Reference the Timer node (MUST be named DeathTimer in the Scene Tree!)
+@onready var death_timer: Timer = $DeathTimer 
+var is_dying: bool = false # Flag to prevent starting the timer multiple times
+
 func _physics_process(delta: float) -> void:
+	# ADDED: Check if player falls off the map
+	if global_position.y > death_y_level:
+		if not is_dying:
+			start_death_sequence()
+			# Don't return here if you want physics process to continue running immediately after trigger
+
 	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -34,7 +44,6 @@ func _physics_process(delta: float) -> void:
 
 	# Attack Input
 	if Input.is_action_just_pressed("attack") and not is_attacking:
-		# Check if the sound node exists before playing to prevent crashes
 		if sfx_attack:
 			sfx_attack.play()
 		else:
@@ -44,9 +53,6 @@ func _physics_process(delta: float) -> void:
 		return  # Stops other movement logic while attacking
 
 	# Jump Input
-	# Checks for Spacebar (ui_accept) OR Up Arrow (ui_up)
-	# Note: To add 'W' for jump correctly, it's best to use Input Map settings, 
-	# but 'ui_up' usually covers the Up Arrow.
 	if (Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_up")) and jumps_left > 0:
 		if sfx_jump:
 			sfx_jump.play()
@@ -55,11 +61,9 @@ func _physics_process(delta: float) -> void:
 		jumps_left -= 1
 
 	# Movement
-	# We manually check for Left/Right actions (Arrows) AND the A/D keys
 	var move_left = Input.is_action_pressed("ui_left") or Input.is_physical_key_pressed(KEY_A)
 	var move_right = Input.is_action_pressed("ui_right") or Input.is_physical_key_pressed(KEY_D)
 	
-	# Calculate direction based on which keys are pressed
 	var direction = 0
 	if move_right:
 		direction += 1
@@ -69,7 +73,6 @@ func _physics_process(delta: float) -> void:
 	if direction != 0:
 		velocity.x = direction * SPEED
 
-		# Flip sprite depending on direction
 		anim.flip_h = direction < 0
 
 		if is_on_floor() and not is_attacking:
@@ -84,33 +87,26 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-
 func _play_attack() -> void:
 	is_attacking = true
 	anim.play("attack")
 
-	# Turn on hitbox
-	# Check if nodes exist to avoid crash if they are missing
 	if attack_hitbox and attack_shape:
 		attack_hitbox.monitoring = true
 		attack_shape.disabled = false
 
-	# Wait until attack animation is finished
 	await anim.animation_finished
 
-	# Turn off hitbox
 	if attack_hitbox and attack_shape:
 		attack_hitbox.monitoring = false
 		attack_shape.disabled = true
 
 	is_attacking = false
 
-
 # When NPC hits player
 func hurt():
 	if not is_attacking:
 		anim.play("hurt")
-
 
 func _on_area_2d_coin_area_entered(area: Area2D) -> void:
 	if area.is_in_group("coin"):
@@ -119,9 +115,25 @@ func _on_area_2d_coin_area_entered(area: Area2D) -> void:
 		set_coin(coin_counter + 1)
 		print(coin_counter)
 
-
 func set_coin(new_coin_count: int) -> void:
 	coin_counter = new_coin_count
-	# Check if label exists
 	if coin_label:
 		coin_label.text = "Coin Count: " + str(coin_counter)
+
+# --- ADDED DEATH FUNCTIONS ---
+
+func start_death_sequence() -> void:
+	is_dying = true
+	velocity = Vector2.ZERO # Stop movement immediately
+	# Optional: set_physics_process(false) # If you want ALL physics to stop instantly
+	death_timer.start() # This is the line that needs the timer node to exist
+	print("Player is falling! Dying in 2 seconds...")
+
+func _on_death_timer_timeout() -> void:
+	# This function is called after the 2-second timer finishes
+	die()
+
+func die() -> void:
+	print("Player has died.")
+	# The actual death action:
+	get_tree().reload_current_scene() 

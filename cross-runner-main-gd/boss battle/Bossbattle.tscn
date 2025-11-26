@@ -899,6 +899,10 @@ tile_set = SubResource("TileSet_bo3pb")
 position = Vector2(250.5, 22)
 shape = SubResource("RectangleShape2D_lii25")
 
+[node name="DeathTimer" type="Timer" parent="TileMapLayer"]
+wait_time = 2.0
+one_shot = true
+
 [node name="Player4Boss" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(58, -6)
 scale = Vector2(1.0000004, 1.0000004)
@@ -928,3 +932,5 @@ zoom = Vector2(8, 8)
 [node name="sfx_jump" type="AudioStreamPlayer" parent="Player4Boss"]
 
 [node name="sfx_coin" type="AudioStreamPlayer" parent="Player4Boss"]
+
+[connection signal="timeout" from="TileMapLayer/DeathTimer" to="Player4Boss" method="_on_death_timer_timeout"]
