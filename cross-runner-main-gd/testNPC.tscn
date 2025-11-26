@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2xqi3eagoc1"]
+
+[ext_resource type="Texture2D" uid="uid://rlue0qey4nkn" path="res://icon.svg" id="1_c8nu0"]
+[ext_resource type="Script" uid="uid://j6bi0u4lgxke" path="res://enemyTEST.gd" id="2_gnhgy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnhgy"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8nu0"]
+size = Vector2(128, 128)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="playerTEST" type="CharacterBody2D" parent="."]
+position = Vector2(1019, 327)
+
+[node name="Sprite2D" type="Sprite2D" parent="playerTEST"]
+texture = ExtResource("1_c8nu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerTEST"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_gnhgy")
+
+[node name="enemyTEST" type="CharacterBody2D" parent="."]
+position = Vector2(209, 820)
+script = ExtResource("2_gnhgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="enemyTEST"]
+modulate = Color(0.87009543, 0.6594619, 0, 1)
+texture = ExtResource("1_c8nu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemyTEST"]
+shape = SubResource("RectangleShape2D_c8nu0")

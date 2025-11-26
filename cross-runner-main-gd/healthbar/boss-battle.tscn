@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://4n01isy0k3lv"]
+
+[ext_resource type="Script" uid="uid://dv2th6dbepyt8" path="res://healthbar/Boss_Healthbar.gd" id="1_odoqe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_061bp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdsvi"]
+bg_color = Color(0.21568628, 0.54901963, 0.47843137, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxjrm"]
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27450982)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqout"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="BossBattle" type="Node2D"]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+z_index = 1
+offset_right = 240.0
+offset_bottom = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_061bp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cdsvi")
+value = 60.0
+show_percentage = false
+script = ExtResource("1_odoqe")
+
+[node name="DamageBar" type="ProgressBar" parent="ProgressBar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_kxjrm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hqout")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="ProgressBar/DamageBar"]
+wait_time = 0.4
+
+[connection signal="timeout" from="ProgressBar/DamageBar/Timer" to="ProgressBar" method="_on_timer_timeout"]

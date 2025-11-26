@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2cebt6xo2tgd"]
+
+[ext_resource type="Texture2D" uid="uid://cg14qnddc88yq" path="res://Resources/black-screen_39.png" id="1_k2yj5"]
+[ext_resource type="Script" uid="uid://cblnbbguwvygi" path="res://background.gd" id="2_ia8qu"]
+[ext_resource type="Texture2D" uid="uid://f0l8mxllyqnm" path="res://Resources/pngimg.com - snow_PNG16.png" id="2_xic2l"]
+[ext_resource type="Script" uid="uid://xi6u7xfji75m" path="res://fore.gd" id="3_s70hm"]
+[ext_resource type="Texture2D" uid="uid://ciq228fgyi06w" path="res://Resources/237722 (1).png" id="4_ia8qu"]
+[ext_resource type="Script" uid="uid://bgrifyc0858h4" path="res://char.gd" id="5_xic2l"]
+[ext_resource type="Script" uid="uid://dfmoynxt51l0y" path="res://snow.gd" id="6_s70hm"]
+[ext_resource type="Script" uid="uid://iauc8nnvga8d" path="res://goback.gd" id="8_6hb5c"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2318, 1692)
+scale = Vector2(4.836458, 5.9481483)
+texture = ExtResource("1_k2yj5")
+script = ExtResource("2_ia8qu")
+
+[node name="Fore" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2911, 978)
+scale = Vector2(1.2010336, 1.2890989)
+texture = ExtResource("2_xic2l")
+script = ExtResource("3_s70hm")
+
+[node name="Char" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1320, 1523.0001)
+scale = Vector2(4.587891, 5.0009193)
+texture = ExtResource("4_ia8qu")
+script = ExtResource("5_xic2l")
+
+[node name="Snow" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(490.00006, 1374)
+scale = Vector2(1.1292166, 1.3481104)
+texture = ExtResource("2_xic2l")
+script = ExtResource("6_s70hm")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+
+[node name="Snow2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2484, 3479)
+scale = Vector2(2.1086779, 2.5746367)
+texture = ExtResource("2_xic2l")
+script = ExtResource("6_s70hm")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 1231.0
+offset_top = 586.0
+offset_right = 1639.0
+offset_bottom = 1150.0
+theme_override_font_sizes/font_size = 64
+text = "Made by...
+
+Edvard 
+
+Hamza
+
+Oliver
+
+Hassan"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1231.0
+offset_top = 1399.0
+offset_right = 1636.0
+offset_bottom = 1540.0449
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 42
+text = "Go Back"
+script = ExtResource("8_6hb5c")
