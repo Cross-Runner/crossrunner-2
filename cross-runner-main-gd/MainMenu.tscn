@@ -22,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="FactsAboutChrismtas5" type="Sprite2D" parent="."]
-position = Vector2(1721.8872, 962.5)
+position = Vector2(1719.9999, 962)
 scale = Vector2(5.415392, 4.764851)
 texture = ExtResource("1_qoqlk")
 
