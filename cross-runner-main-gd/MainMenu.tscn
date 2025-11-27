@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://8yw45yb0vja"]
+[gd_scene load_steps=7 format=3 uid="uid://8yw45yb0vja"]
 
+[ext_resource type="Script" uid="uid://ba2bkf46pee5l" path="res://main_menu.gd" id="1_iwfq2"]
 [ext_resource type="Texture2D" uid="uid://dkr6jseitwavu" path="res://Resources/Facts-about-Chrismtas-5.jpg" id="1_qoqlk"]
 [ext_resource type="Script" uid="uid://yelvnhqekend" path="res://button.gd" id="2_iwfq2"]
 [ext_resource type="Script" uid="uid://56y53ahymf7c" path="res://button_3.gd" id="3_7r1g0"]
@@ -20,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_iwfq2")
 
 [node name="FactsAboutChrismtas5" type="Sprite2D" parent="."]
 position = Vector2(1719.9999, 962)
@@ -60,9 +62,23 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7yr4w")
 text = "Credits"
 script = ExtResource("3_7r1g0")
 
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 12
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxFlat_7yr4w")
+text = "Quit"
+
+[node name="QuitPopup" type="ConfirmationDialog" parent="."]
+oversampling_override = 1.0
+size = Vector2i(350, 100)
+
 [node name="sfx_button" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_cqjrg")
 volume_db = -3.0
 
 [connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="VBoxContainer/Button" method="_on_button_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="VBoxContainer/Button" method="_on_button_3_pressed"]

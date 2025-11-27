@@ -1,23 +1,24 @@
-[gd_scene load_steps=86 format=4 uid="uid://45vk8t3n1sg1"]
+[gd_scene load_steps=88 format=4 uid="uid://45vk8t3n1sg1"]
 
 [ext_resource type="Texture2D" uid="uid://ql2okrshffpq" path="res://Resources/Final/Background_0.png" id="1_e3hiu"]
 [ext_resource type="Texture2D" uid="uid://r1kaybxap2v3" path="res://Resources/Final/Grass_background_1.png" id="2_7236l"]
 [ext_resource type="Texture2D" uid="uid://cwwp3kabon0lc" path="res://Resources/Final/Tiles.png" id="3_7236l"]
 [ext_resource type="Texture2D" uid="uid://lbhnhc3yjxd4" path="res://Resources/Final/113-1139407_portal-transparent-portal-pixel-art-png-png-download (1).png" id="4_8e4tx"]
 [ext_resource type="Script" uid="uid://yj3b0fjukoxy" path="res://area_2d_4d.gd" id="4_yaa3j"]
+[ext_resource type="Script" uid="uid://d35eb7uf3h0l2" path="res://area_scene_4.gd" id="5_63lqf"]
 [ext_resource type="Script" uid="uid://bpfhm3xotuh1f" path="res://character_body_2d.gd" id="5_526jq"]
 [ext_resource type="Texture2D" uid="uid://ftq5tcoqrabm" path="res://FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png" id="6_yaa3j"]
 [ext_resource type="Texture2D" uid="uid://bf8ecgarnybrw" path="res://FREE_Samurai 2D Pixel Art v1.2/Sprites/HURT.png" id="7_2wjic"]
 [ext_resource type="Texture2D" uid="uid://bfwqdqbyfs8qk" path="res://FREE_Samurai 2D Pixel Art v1.2/Sprites/IDLE.png" id="8_kq7lv"]
 [ext_resource type="Texture2D" uid="uid://bujs3nind3v03" path="res://FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png" id="9_8438c"]
 [ext_resource type="Texture2D" uid="uid://bqqdk4e7hv0he" path="res://HUD/hudHeart_full.png" id="11_2wjic"]
-[ext_resource type="PackedScene" path="res://coin.tscn" id="12_kq7lv"]
+[ext_resource type="PackedScene" uid="uid://w5ifqe76lkfr" path="res://coin.tscn" id="12_kq7lv"]
 [ext_resource type="AudioStream" uid="uid://ccamgmnbjey64" path="res://sfx/narutoJumpsfx.ogg" id="13_8438c"]
 [ext_resource type="AudioStream" uid="uid://rola3al1cmax" path="res://sfx/narutoSwingsfx.ogg" id="14_id2bo"]
 [ext_resource type="AudioStream" uid="uid://xlbh4thvu07n" path="res://sfx/untitled.wav" id="15_1tr0o"]
 [ext_resource type="AudioStream" uid="uid://bdg7b2u2v1dev" path="res://sfx/buttonSFX1.wav" id="16_theea"]
 [ext_resource type="AudioStream" uid="uid://b04d1ly2j7c24" path="res://sfx/Jeremy Korpas - Sour Rock  NO COPYRIGHT 8-bit Music.mp3" id="18_8bw4v"]
-[ext_resource type="Script" path="res://enemy.gd" id="18_63lqf"]
+[ext_resource type="Script" uid="uid://c24ulin6uq2ow" path="res://enemy.gd" id="18_63lqf"]
 [ext_resource type="Texture2D" uid="uid://cc4wv7g5o8ncy" path="res://Resources/NES - Faxanadu - Miscellaneous - NPCs.png" id="18_w5wtu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8e4tx"]
@@ -450,6 +451,9 @@ size = Vector2(313.74927, 206.25006)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2qox"]
 size = Vector2(43.750015, 68.75)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t4vjv"]
+distance = -1889.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lweto"]
 texture = ExtResource("3_7236l")
@@ -1458,6 +1462,14 @@ shape = SubResource("RectangleShape2D_ci2wq")
 position = Vector2(2028.1252, 666.8751)
 shape = SubResource("RectangleShape2D_t2qox")
 
+[node name="Killbody2" type="StaticBody2D" parent="TileMapLayer"]
+
+[node name="Area_Scene4" type="Area2D" parent="TileMapLayer/Killbody2"]
+script = ExtResource("5_63lqf")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="TileMapLayer/Killbody2/Area_Scene4"]
+shape = SubResource("WorldBoundaryShape2D_t4vjv")
+
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 texture_filter = 1
 tile_map_data = PackedByteArray("AABYAEAAAAAAAA8AAABYAEEAAAAAABAAAABYAEIAAAAAABEAAABYAEMAAAAAABIAAABZAEAAAAABAA8AAABZAEEAAAABABAAAABZAEIAAAABABEAAABaAEAAAAACAA8AAABaAEEAAAACABAAAABbAEAAAAADAA8AAABbAEEAAAADABAAAABaAEIAAAACABEAAABcAEEAAAAAABAAAABdAEEAAAABABAAAABeAEEAAAACABAAAABfAEEAAAADABAAAABcAEAAAAAAAA8AAABdAEAAAAABAA8AAABeAEAAAAACAA8AAABfAEAAAAADAA8AAAA0ADkAAAAAAA8AAAA0ADoAAAAAABAAAAA=")
@@ -1496,10 +1508,12 @@ zoom = Vector2(8, 8)
 position_smoothing_enabled = true
 
 [node name="health_bar" type="CanvasLayer" parent="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
+transform = Transform2D(0.8, 0, 0, 0.8, 0, 0)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CharacterBody2D/health_bar"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 392.0
+offset_bottom = 128.0
 script = SubResource("GDScript_w5wtu")
 
 [node name="heart" type="TextureRect" parent="CharacterBody2D/health_bar/HBoxContainer"]
@@ -1615,5 +1629,6 @@ volume_db = -12.0
 autoplay = true
 
 [connection signal="area_entered" from="TileMapLayer/Killbody/Area2D4D" to="TileMapLayer/Killbody/Area2D4D" method="_on_area_entered"]
+[connection signal="area_entered" from="TileMapLayer/Killbody2/Area_Scene4" to="TileMapLayer/Killbody2/Area_Scene4" method="_on_area_entered"]
 [connection signal="area_entered" from="CharacterBody2D/Area2D_coin" to="CharacterBody2D" method="_on_area_2d_coin_area_entered"]
 [connection signal="area_entered" from="enemy/Hurtbox" to="TileMapLayer/Killbody/Area2D4D" method="_on_hurtbox_area_entered"]
