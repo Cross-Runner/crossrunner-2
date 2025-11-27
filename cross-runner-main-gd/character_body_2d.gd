@@ -8,9 +8,10 @@ var jumps_left = MAX_JUMPS
 
 @onready var anim = $AnimatedSprite2D
 @onready var coin_label = %Label
-@onready var sfx_attack: AudioStreamPlayer2D = $"../sfx_attack"
-@onready var sfx_jump: AudioStreamPlayer2D = $"../sfx_jump"
-@onready var sfx_coin: AudioStreamPlayer2D = $"../sfx_coin"
+@onready var sfx_jump: AudioStreamPlayer2D = $sfx_jump
+@onready var sfx_attack: AudioStreamPlayer2D = $sfx_attack
+@onready var sfx_coin: AudioStreamPlayer2D = $sfx_coin
+
 
 # Attack hitbox
 @onready var attack_hitbox = $AttackHitbox
