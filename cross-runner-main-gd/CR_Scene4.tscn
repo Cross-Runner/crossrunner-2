@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=4 uid="uid://45vk8t3n1sg1"]
+[gd_scene load_steps=90 format=4 uid="uid://45vk8t3n1sg1"]
 
 [ext_resource type="Texture2D" uid="uid://ql2okrshffpq" path="res://Resources/Final/Background_0.png" id="1_e3hiu"]
 [ext_resource type="Texture2D" uid="uid://r1kaybxap2v3" path="res://Resources/Final/Grass_background_1.png" id="2_7236l"]
@@ -16,12 +16,14 @@
 [ext_resource type="AudioStream" uid="uid://ccamgmnbjey64" path="res://sfx/narutoJumpsfx.ogg" id="13_8438c"]
 [ext_resource type="AudioStream" uid="uid://rola3al1cmax" path="res://sfx/narutoSwingsfx.ogg" id="14_id2bo"]
 [ext_resource type="AudioStream" uid="uid://xlbh4thvu07n" path="res://sfx/untitled.wav" id="15_1tr0o"]
+[ext_resource type="Script" uid="uid://djhnyxsyj2g40" path="res://hurtbox.gd" id="15_t4vjv"]
 [ext_resource type="AudioStream" uid="uid://bdg7b2u2v1dev" path="res://sfx/buttonSFX1.wav" id="16_theea"]
 [ext_resource type="AudioStream" uid="uid://b04d1ly2j7c24" path="res://sfx/Jeremy Korpas - Sour Rock  NO COPYRIGHT 8-bit Music.mp3" id="18_8bw4v"]
 [ext_resource type="Script" uid="uid://c24ulin6uq2ow" path="res://enemy.gd" id="18_63lqf"]
 [ext_resource type="Texture2D" uid="uid://cc4wv7g5o8ncy" path="res://Resources/NES - Faxanadu - Miscellaneous - NPCs.png" id="18_w5wtu"]
+[ext_resource type="AudioStream" uid="uid://dpmrhvx1pv340" path="res://sfx/NPCsfx.ogg" id="22_lc8hl"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8e4tx"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_63lqf"]
 texture = ExtResource("3_7236l")
 2:1/0 = 0
 3:1/0 = 0
@@ -405,7 +407,7 @@ texture = ExtResource("3_7236l")
 8:8/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_8e4tx"]
-sources/0 = SubResource("TileSetAtlasSource_8e4tx")
+sources/0 = SubResource("TileSetAtlasSource_63lqf")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_526jq"]
 size = Vector2(213, 21.5)
@@ -1125,8 +1127,8 @@ shadow_color = Color(0, 0, 0, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_2wjic"]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w5wtu"]
-radius = 12.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_63lqf"]
+radius = 17.999992
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxcha"]
 atlas = ExtResource("18_w5wtu")
@@ -1159,13 +1161,13 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t4vjv"]
 radius = 6.0
-height = 34.0
+height = 33.333496
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k52ru"]
-size = Vector2(12, 26)
+size = Vector2(12, 27.222351)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi72o"]
-size = Vector2(16.666962, 36.11116)
+size = Vector2(13.888908, 34.72235)
 
 [node name="Node2D2" type="Node2D"]
 
@@ -1482,53 +1484,53 @@ texture = ExtResource("4_8e4tx")
 region_enabled = true
 region_rect = Rect2(635, 40, 195, 383)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(93, 998)
 scale = Vector2(1.0000004, 1.0000004)
 script = ExtResource("5_526jq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 texture_filter = 1
 position = Vector2(0, -14.285736)
 sprite_frames = SubResource("SpriteFrames_id2bo")
 animation = &"attack"
 autoplay = "walk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(4.464304, -0.8927939)
 shape = SubResource("CircleShape2D_1tr0o")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Player"]
 position = Vector2(3.2589512, 7.4404297)
 shape = SubResource("RectangleShape2D_theea")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(50, -20)
 zoom = Vector2(8, 8)
 position_smoothing_enabled = true
 
-[node name="health_bar" type="CanvasLayer" parent="CharacterBody2D"]
+[node name="health_bar" type="CanvasLayer" parent="Player"]
 scale = Vector2(0.8, 0.8)
 transform = Transform2D(0.8, 0, 0, 0.8, 0, 0)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CharacterBody2D/health_bar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Player/health_bar"]
 offset_right = 392.0
 offset_bottom = 128.0
 script = SubResource("GDScript_w5wtu")
 
-[node name="heart" type="TextureRect" parent="CharacterBody2D/health_bar/HBoxContainer"]
+[node name="heart" type="TextureRect" parent="Player/health_bar/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("11_2wjic")
 
-[node name="heart2" type="TextureRect" parent="CharacterBody2D/health_bar/HBoxContainer"]
+[node name="heart2" type="TextureRect" parent="Player/health_bar/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("11_2wjic")
 
-[node name="heart3" type="TextureRect" parent="CharacterBody2D/health_bar/HBoxContainer"]
+[node name="heart3" type="TextureRect" parent="Player/health_bar/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("11_2wjic")
 
-[node name="Label" type="Label" parent="CharacterBody2D/health_bar"]
+[node name="Label" type="Label" parent="Player/health_bar"]
 unique_name_in_owner = true
 offset_left = 12.0
 offset_top = 242.0
@@ -1539,20 +1541,59 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "Coin Count: 0 "
 label_settings = SubResource("LabelSettings_kq7lv")
 
-[node name="Area2D_coin" type="Area2D" parent="CharacterBody2D"]
+[node name="Area2D_coin" type="Area2D" parent="Player"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D_coin"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D_coin"]
 position = Vector2(3.9999983, 2.999999)
 shape = SubResource("CircleShape2D_2wjic")
 
-[node name="AttackHitbox" type="Area2D" parent="CharacterBody2D"]
+[node name="AttackHitbox" type="Area2D" parent="Player"]
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/AttackHitbox"]
-position = Vector2(20.999992, 0.99999964)
-rotation = -0.17618008
-scale = Vector2(1.9200046, 1)
-shape = SubResource("CircleShape2D_w5wtu")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/AttackHitbox"]
+position = Vector2(15.999994, 0.99999976)
+rotation = -0.06617166
+scale = Vector2(1.7506297, 1.0412891)
+shape = SubResource("CircleShape2D_63lqf")
+disabled = true
+
+[node name="sfx_jump" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-92.99997, -997.99963)
+scale = Vector2(0.99999964, 0.99999964)
+stream = ExtResource("13_8438c")
+volume_db = -10.0
+pitch_scale = 1.32
+
+[node name="sfx_attack" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-92.99997, -997.99963)
+scale = Vector2(0.99999964, 0.99999964)
+stream = ExtResource("14_id2bo")
+
+[node name="sfx_coin" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-92.99997, -997.99963)
+scale = Vector2(0.99999964, 0.99999964)
+stream = ExtResource("15_1tr0o")
+volume_db = -10.0
+pitch_scale = 1.5
+
+[node name="sfx_button" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-92.99997, -997.99963)
+scale = Vector2(0.99999964, 0.99999964)
+stream = ExtResource("16_theea")
+volume_db = -3.0
+
+[node name="MUSIC" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-92.99997, -997.99963)
+scale = Vector2(0.99999964, 0.99999964)
+stream = ExtResource("18_8bw4v")
+volume_db = -12.0
+autoplay = true
+
+[node name="sfx_npc" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-92.99997, -997.99963)
+scale = Vector2(0.99999964, 0.99999964)
+stream = ExtResource("22_lc8hl")
+volume_db = -10.0
 
 [node name="enemy" type="CharacterBody2D" parent="."]
 position = Vector2(1997.9999, 977.99994)
@@ -1568,13 +1609,41 @@ autoplay = "default"
 shape = SubResource("CapsuleShape2D_t4vjv")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy"]
-position = Vector2(0, 3)
+position = Vector2(0.00024414063, 3.055542)
+scale = Vector2(1.0000001, 1.0000001)
 shape = SubResource("RectangleShape2D_k52ru")
 
 [node name="Hurtbox" type="Area2D" parent="enemy"]
+script = ExtResource("15_t4vjv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/Hurtbox"]
-position = Vector2(0, -1.388916)
+position = Vector2(0, -0.694458)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_fi72o")
+
+[node name="enemy2" type="CharacterBody2D" parent="."]
+position = Vector2(642, 1011.99994)
+scale = Vector2(0.72, 0.72)
+script = ExtResource("18_63lqf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy2"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_63lqf")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2"]
+shape = SubResource("CapsuleShape2D_t4vjv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy2"]
+position = Vector2(0.00024414063, 3.055542)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_k52ru")
+
+[node name="Hurtbox" type="Area2D" parent="enemy2"]
+script = ExtResource("15_t4vjv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2/Hurtbox"]
+position = Vector2(0, -0.694458)
 scale = Vector2(1.0000001, 1.0000001)
 shape = SubResource("RectangleShape2D_fi72o")
 
@@ -1606,29 +1675,8 @@ scale = Vector2(0.20000243, 0.20000243)
 position = Vector2(2565.0002, 948.00006)
 scale = Vector2(0.20000243, 0.20000243)
 
-[node name="sfx_jump" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("13_8438c")
-volume_db = -10.0
-pitch_scale = 1.32
-
-[node name="sfx_attack" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("14_id2bo")
-
-[node name="sfx_coin" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("15_1tr0o")
-volume_db = -10.0
-pitch_scale = 1.5
-
-[node name="sfx_button" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("16_theea")
-volume_db = -3.0
-
-[node name="MUSIC" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("18_8bw4v")
-volume_db = -12.0
-autoplay = true
-
 [connection signal="area_entered" from="TileMapLayer/Killbody/Area2D4D" to="TileMapLayer/Killbody/Area2D4D" method="_on_area_entered"]
 [connection signal="area_entered" from="TileMapLayer/Killbody2/Area_Scene4" to="TileMapLayer/Killbody2/Area_Scene4" method="_on_area_entered"]
-[connection signal="area_entered" from="CharacterBody2D/Area2D_coin" to="CharacterBody2D" method="_on_area_2d_coin_area_entered"]
-[connection signal="area_entered" from="enemy/Hurtbox" to="TileMapLayer/Killbody/Area2D4D" method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="Player/Area2D_coin" to="Player" method="_on_area_2d_coin_area_entered"]
+[connection signal="area_entered" from="enemy/Hurtbox" to="enemy" method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="enemy2/Hurtbox" to="enemy2" method="_on_hurtbox_area_entered"]

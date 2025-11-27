@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		sfx_attack.play()
 		_play_attack()
-		return  # Stopper annen bevegelseslogikk mens attack skjer
+		return
 
 	# Jump
 	if Input.is_action_just_pressed("ui_accept") and jumps_left > 0:
@@ -45,8 +45,6 @@ func _physics_process(delta: float) -> void:
 
 	if direction != 0:
 		velocity.x = direction * SPEED
-
-		# Flip sprite depending on direction
 		anim.flip_h = direction < 0
 
 		if is_on_floor() and not is_attacking:
@@ -66,23 +64,19 @@ func _play_attack() -> void:
 	is_attacking = true
 	anim.play("attack")
 
-	# slå på hitbox
 	attack_hitbox.monitoring = true
 	attack_shape.disabled = false
 
-	# vent til attack-animasjonen er ferdig
 	await anim.animation_finished
 
-	# slå av hitbox
 	attack_hitbox.monitoring = false
 	attack_shape.disabled = true
 
 	is_attacking = false
 
 
-# Når NPC treffer spilleren
 func hurt():
-	if not is_attacking:  # kan ikke bli "interruptet" midt i attack hvis du ønsker det
+	if not is_attacking:
 		anim.play("hurt")
 
 
