@@ -1647,6 +1647,58 @@ position = Vector2(0, -0.694458)
 scale = Vector2(1.0000001, 1.0000001)
 shape = SubResource("RectangleShape2D_fi72o")
 
+[node name="enemy3" type="CharacterBody2D" parent="."]
+position = Vector2(1353, 939.99994)
+scale = Vector2(0.72, 0.72)
+script = ExtResource("18_63lqf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy3"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_63lqf")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy3"]
+shape = SubResource("CapsuleShape2D_t4vjv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy3"]
+position = Vector2(0.00024414063, 3.055542)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_k52ru")
+
+[node name="Hurtbox" type="Area2D" parent="enemy3"]
+script = ExtResource("15_t4vjv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy3/Hurtbox"]
+position = Vector2(0, -0.694458)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_fi72o")
+
+[node name="enemy4" type="CharacterBody2D" parent="."]
+position = Vector2(2526, 981)
+scale = Vector2(0.72, 0.72)
+script = ExtResource("18_63lqf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy4"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_63lqf")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy4"]
+shape = SubResource("CapsuleShape2D_t4vjv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy4"]
+position = Vector2(0.00024414063, 3.055542)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_k52ru")
+
+[node name="Hurtbox" type="Area2D" parent="enemy4"]
+script = ExtResource("15_t4vjv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy4/Hurtbox"]
+position = Vector2(0, -0.694458)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_fi72o")
+
 [node name="coin" parent="." instance=ExtResource("12_kq7lv")]
 position = Vector2(724, 929.00006)
 scale = Vector2(0.20000243, 0.20000243)
@@ -1680,3 +1732,5 @@ scale = Vector2(0.20000243, 0.20000243)
 [connection signal="area_entered" from="Player/Area2D_coin" to="Player" method="_on_area_2d_coin_area_entered"]
 [connection signal="area_entered" from="enemy/Hurtbox" to="enemy" method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="enemy2/Hurtbox" to="enemy2" method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="enemy3/Hurtbox" to="enemy3" method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="enemy4/Hurtbox" to="enemy4" method="_on_hurtbox_area_entered"]

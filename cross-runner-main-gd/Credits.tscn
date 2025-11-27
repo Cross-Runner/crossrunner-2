@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b2cebt6xo2tgd"]
 
-[ext_resource type="Texture2D" uid="uid://cg14qnddc88yq" path="res://Resources/black-screen_39.png" id="1_k2yj5"]
+[ext_resource type="Texture2D" uid="uid://ql2okrshffpq" path="res://Resources/Final/Background_0.png" id="1_6hb5c"]
 [ext_resource type="Script" uid="uid://cblnbbguwvygi" path="res://background.gd" id="2_ia8qu"]
 [ext_resource type="Texture2D" uid="uid://f0l8mxllyqnm" path="res://Resources/pngimg.com - snow_PNG16.png" id="2_xic2l"]
 [ext_resource type="Script" uid="uid://xi6u7xfji75m" path="res://fore.gd" id="3_s70hm"]
@@ -13,12 +13,13 @@
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(2318, 1692)
-scale = Vector2(4.836458, 5.9481483)
-texture = ExtResource("1_k2yj5")
+position = Vector2(3731.1108, 3007.5)
+scale = Vector2(17.435186, 18.016827)
+texture = ExtResource("1_6hb5c")
 script = ExtResource("2_ia8qu")
 
 [node name="Fore" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0.11372549, 0.7647059)
 texture_filter = 1
 position = Vector2(2911, 978)
 scale = Vector2(1.2010336, 1.2890989)
@@ -34,7 +35,7 @@ script = ExtResource("5_xic2l")
 
 [node name="Snow" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(490.00006, 1374)
+position = Vector2(-252.99994, 1566.9999)
 scale = Vector2(1.1292166, 1.3481104)
 texture = ExtResource("2_xic2l")
 script = ExtResource("6_s70hm")
@@ -42,8 +43,9 @@ script = ExtResource("6_s70hm")
 [node name="Sprite2D5" type="Sprite2D" parent="."]
 
 [node name="Snow2" type="Sprite2D" parent="."]
+modulate = Color(5.3697925, 0.8104105, 18.399155, 0.65882355)
 texture_filter = 1
-position = Vector2(2484, 3479)
+position = Vector2(4692, 4337)
 scale = Vector2(2.1086779, 2.5746367)
 texture = ExtResource("2_xic2l")
 script = ExtResource("6_s70hm")
