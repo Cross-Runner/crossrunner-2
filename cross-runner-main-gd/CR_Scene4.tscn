@@ -1174,7 +1174,7 @@ size = Vector2(13.888908, 34.72235)
 radius = 6.0
 height = 38.0
 
-[node name="Node2D2" type="Node2D"]
+[node name="Node2D3" type="Node2D"]
 
 [node name="BACKGROUND" type="Node2D" parent="."]
 
@@ -1746,3 +1746,4 @@ region_rect = Rect2(635, 40, 195, 383)
 [connection signal="area_entered" from="enemy2/Hurtbox" to="enemy2" method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="enemy3/Hurtbox" to="enemy3" method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="enemy4/Hurtbox" to="enemy4" method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Area2D" to="TileMapLayer/Killbody/Area2D4D" method="_on_area_2d_body_entered"]
