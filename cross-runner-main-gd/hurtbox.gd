@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var target_scene: String = "res://CR_Scene4.tscn"
-@export var bounce_force := Vector2(0, -450)
+@export var bounce_force := Vector2(0, -350)
 
 var triggered := false
 

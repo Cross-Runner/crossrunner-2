@@ -1593,7 +1593,7 @@ autoplay = true
 position = Vector2(-92.99997, -997.99963)
 scale = Vector2(0.99999964, 0.99999964)
 stream = ExtResource("22_lc8hl")
-volume_db = -10.0
+volume_db = -13.0
 
 [node name="enemy" type="CharacterBody2D" parent="."]
 position = Vector2(1997.9999, 977.99994)

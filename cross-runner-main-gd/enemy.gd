@@ -3,7 +3,8 @@ extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 @onready var hurtbox = $Hurtbox
 @onready var hurtbox_shape = $Hurtbox/CollisionShape2D
-@onready var sfx_npc: AudioStreamPlayer2D = $"../sfx_npc"
+@onready var sfx_npc: AudioStreamPlayer2D = $"../Player/sfx_npc"
+
 
 var target : Node2D = null
 var speed = 40
