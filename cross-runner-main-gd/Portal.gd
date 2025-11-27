@@ -1,7 +1,11 @@
 extends Area2D
 
-@export var scene_to_load: String = "res://.tscn"
+@export var target_scene: String = "res://CR_Scene5.tscn"
 
-func _on_body_entered(body):
+func _ready() -> void:
+	connect("body_entered", Callable(self, "_on_body_entered"))
+
+func _on_body_entered(body: Node) -> void:
+	# Sjekk at det er spilleren som går inn i området
 	if body.is_in_group("player"):
-		get_tree().change_scene_to_file(scene_to_load)
+		get_tree().change_scene_to_file(target_scene)
