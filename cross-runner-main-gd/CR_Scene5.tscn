@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=4 uid="uid://xldqnf1ey2pj"]
+[gd_scene load_steps=86 format=4 uid="uid://c5mtwyuf0emhx"]
 
 [ext_resource type="Texture2D" uid="uid://ql2okrshffpq" path="res://Resources/Final/Background_0.png" id="1_dwen6"]
 [ext_resource type="Texture2D" uid="uid://r1kaybxap2v3" path="res://Resources/Final/Grass_background_1.png" id="2_16sqb"]
@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://bdg7b2u2v1dev" path="res://sfx/buttonSFX1.wav" id="16_plpo7"]
 [ext_resource type="AudioStream" uid="uid://b04d1ly2j7c24" path="res://sfx/Jeremy Korpas - Sour Rock  NO COPYRIGHT 8-bit Music.mp3" id="17_gt1uo"]
 [ext_resource type="AudioStream" uid="uid://dpmrhvx1pv340" path="res://sfx/NPCsfx.ogg" id="18_joctc"]
-[ext_resource type="PackedScene" uid="uid://w5ifqe76lkfr" path="res://coin.tscn" id="19_ss5dy"]
+[ext_resource type="PackedScene" path="res://coin.tscn" id="19_ss5dy"]
 [ext_resource type="Script" uid="uid://c24ulin6uq2ow" path="res://enemy.gd" id="20_t4c48"]
 [ext_resource type="Texture2D" uid="uid://cc4wv7g5o8ncy" path="res://Resources/NES - Faxanadu - Miscellaneous - NPCs.png" id="21_8go4l"]
 [ext_resource type="Script" uid="uid://djhnyxsyj2g40" path="res://hurtbox.gd" id="22_fg8l5"]
@@ -1164,6 +1164,68 @@ position = Vector2(0, -0.694458)
 scale = Vector2(1.0000001, 1.0000001)
 shape = SubResource("RectangleShape2D_gt1uo")
 
+[node name="enemy2" type="CharacterBody2D" parent="."]
+position = Vector2(992, 851.99994)
+scale = Vector2(0.72, 0.72)
+script = ExtResource("20_t4c48")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy2"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_5xjkv")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2"]
+shape = SubResource("CapsuleShape2D_k8bl2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy2"]
+position = Vector2(0.00024414063, 3.055542)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_plpo7")
+
+[node name="Hurtbox" type="Area2D" parent="enemy2"]
+script = ExtResource("22_fg8l5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2/Hurtbox"]
+position = Vector2(0, -0.694458)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_gt1uo")
+
+[node name="coin2" parent="." instance=ExtResource("19_ss5dy")]
+position = Vector2(453, 1031)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="enemy3" type="CharacterBody2D" parent="."]
+position = Vector2(416, 1042)
+scale = Vector2(0.72, 0.72)
+script = ExtResource("20_t4c48")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy3"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_5xjkv")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy3"]
+shape = SubResource("CapsuleShape2D_k8bl2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy3"]
+position = Vector2(0.00024414063, 3.055542)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_plpo7")
+
+[node name="Hurtbox" type="Area2D" parent="enemy3"]
+script = ExtResource("22_fg8l5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy3/Hurtbox"]
+position = Vector2(0, -0.694458)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_gt1uo")
+
+[node name="coin3" parent="." instance=ExtResource("19_ss5dy")]
+position = Vector2(223.00003, 988)
+scale = Vector2(0.20000243, 0.20000243)
+
 [connection signal="area_entered" from="BACKGROUND/Killbody/Area2D4D" to="BACKGROUND/Killbody/Area2D4D" method="_on_area_entered"]
 [connection signal="area_entered" from="Player/Area2D_coin" to="Player" method="_on_area_2d_coin_area_entered"]
 [connection signal="area_entered" from="enemy/Hurtbox" to="enemy" method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="enemy2/Hurtbox" to="enemy2" method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="enemy3/Hurtbox" to="enemy3" method="_on_hurtbox_area_entered"]
