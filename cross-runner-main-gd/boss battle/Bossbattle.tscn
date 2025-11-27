@@ -1,5 +1,6 @@
-[gd_scene load_steps=94 format=4 uid="uid://diwdfyykp7sxb"]
+[gd_scene load_steps=95 format=4 uid="uid://diwdfyykp7sxb"]
 
+[ext_resource type="Script" uid="uid://xe0edrfw1jpx" path="res://boss battle/boss_character.gd" id="1_2gvwi"]
 [ext_resource type="Texture2D" uid="uid://3wg4ue1a0oxy" path="res://boss battle/idle_1.png" id="1_oawp3"]
 [ext_resource type="Texture2D" uid="uid://druqgh2u34aqq" path="res://boss battle/idle_2.png" id="2_ihck0"]
 [ext_resource type="Texture2D" uid="uid://bsdd711clrq8k" path="res://boss battle/idle_3.png" id="3_ctx4h"]
@@ -866,6 +867,7 @@ size = Vector2(19.6131, 23.095245)
 [node name="Node2D" type="Node2D"]
 
 [node name="BossCharacter" type="CharacterBody2D" parent="."]
+script = ExtResource("1_2gvwi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BossCharacter"]
 position = Vector2(269.00003, -39.000004)
