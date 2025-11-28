@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=4 uid="uid://45vk8t3n1sg1"]
+[gd_scene load_steps=94 format=4 uid="uid://45vk8t3n1sg1"]
 
 [ext_resource type="Texture2D" uid="uid://ql2okrshffpq" path="res://Resources/Final/Background_0.png" id="1_e3hiu"]
 [ext_resource type="Texture2D" uid="uid://r1kaybxap2v3" path="res://Resources/Final/Grass_background_1.png" id="2_7236l"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cc4wv7g5o8ncy" path="res://Resources/NES - Faxanadu - Miscellaneous - NPCs.png" id="18_w5wtu"]
 [ext_resource type="Script" uid="uid://cu86ck5rnox8v" path="res://Portal.gd" id="22_ci2wq"]
 [ext_resource type="AudioStream" uid="uid://dpmrhvx1pv340" path="res://sfx/NPCsfx.ogg" id="22_lc8hl"]
+[ext_resource type="Script" uid="uid://ct0o08qbee2t0" path="res://area_2d_2.gd" id="24_k52ru"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_63lqf"]
 texture = ExtResource("3_7236l")
@@ -1174,6 +1175,9 @@ size = Vector2(13.888908, 34.72235)
 radius = 6.0
 height = 38.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lp62"]
+size = Vector2(3818.5, 44)
+
 [node name="Node2D3" type="Node2D"]
 
 [node name="BACKGROUND" type="Node2D" parent="."]
@@ -1739,6 +1743,13 @@ texture = ExtResource("4_8e4tx")
 region_enabled = true
 region_rect = Rect2(635, 40, 195, 383)
 
+[node name="WorldBarrier" type="Area2D" parent="."]
+script = ExtResource("24_k52ru")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBarrier"]
+position = Vector2(1636, 1823)
+shape = SubResource("RectangleShape2D_0lp62")
+
 [connection signal="area_entered" from="TileMapLayer/Killbody/Area2D4D" to="TileMapLayer/Killbody/Area2D4D" method="_on_area_entered"]
 [connection signal="area_entered" from="TileMapLayer/Killbody2/Area_Scene4" to="TileMapLayer/Killbody2/Area_Scene4" method="_on_area_entered"]
 [connection signal="area_entered" from="Player/Area2D_coin" to="Player" method="_on_area_2d_coin_area_entered"]
@@ -1747,3 +1758,4 @@ region_rect = Rect2(635, 40, 195, 383)
 [connection signal="area_entered" from="enemy3/Hurtbox" to="enemy3" method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="enemy4/Hurtbox" to="enemy4" method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="Area2D" to="TileMapLayer/Killbody/Area2D4D" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="WorldBarrier" to="TileMapLayer/Killbody/Area2D4D" method="_on_area_2d_2_body_entered"]

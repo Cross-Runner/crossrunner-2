@@ -1,8 +1,8 @@
-[gd_scene load_steps=63 format=4 uid="uid://cowq35l0nvx8"]
+[gd_scene load_steps=63 format=4 uid="uid://bwn23taolhmwa"]
 
 [ext_resource type="Texture2D" uid="uid://cwwp3kabon0lc" path="res://Resources/Final/Tiles.png" id="1_b0xqd"]
 [ext_resource type="Texture2D" uid="uid://lbhnhc3yjxd4" path="res://Resources/Final/113-1139407_portal-transparent-portal-pixel-art-png-png-download (1).png" id="2_k52sp"]
-[ext_resource type="Script" uid="uid://d0cpio77wcnag" path="res://area_2d_3d.gd" id="2_x4xdy"]
+[ext_resource type="Script" path="res://area_2d_3d.gd" id="2_x4xdy"]
 [ext_resource type="Script" uid="uid://d2odl3gk4nona" path="res://area_2d.gd" id="3_eijjj"]
 [ext_resource type="Script" uid="uid://bpfhm3xotuh1f" path="res://character_body_2d.gd" id="3_wg0gw"]
 [ext_resource type="Texture2D" uid="uid://ftq5tcoqrabm" path="res://FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png" id="6_c3x6o"]

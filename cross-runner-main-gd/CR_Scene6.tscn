@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=4 uid="uid://by0ljbwdta6yg"]
+[gd_scene load_steps=89 format=4 uid="uid://bccf20ntbuwlr"]
 
 [ext_resource type="Texture2D" uid="uid://ql2okrshffpq" path="res://Resources/Final/Background_0.png" id="1_ix0s0"]
 [ext_resource type="Texture2D" uid="uid://r1kaybxap2v3" path="res://Resources/Final/Grass_background_1.png" id="2_6jpsn"]
@@ -16,12 +16,13 @@
 [ext_resource type="AudioStream" uid="uid://bdg7b2u2v1dev" path="res://sfx/buttonSFX1.wav" id="13_4kwmw"]
 [ext_resource type="AudioStream" uid="uid://b04d1ly2j7c24" path="res://sfx/Jeremy Korpas - Sour Rock  NO COPYRIGHT 8-bit Music.mp3" id="14_s4l5x"]
 [ext_resource type="AudioStream" uid="uid://dpmrhvx1pv340" path="res://sfx/NPCsfx.ogg" id="15_onae8"]
-[ext_resource type="PackedScene" uid="uid://w5ifqe76lkfr" path="res://coin.tscn" id="17_6feur"]
+[ext_resource type="PackedScene" path="res://coin.tscn" id="17_6feur"]
 [ext_resource type="Script" uid="uid://c24ulin6uq2ow" path="res://enemy.gd" id="18_4vc2q"]
 [ext_resource type="Texture2D" uid="uid://cc4wv7g5o8ncy" path="res://Resources/NES - Faxanadu - Miscellaneous - NPCs.png" id="19_iln8o"]
 [ext_resource type="Script" uid="uid://djhnyxsyj2g40" path="res://hurtbox.gd" id="20_vqapr"]
 [ext_resource type="Texture2D" uid="uid://lbhnhc3yjxd4" path="res://Resources/Final/113-1139407_portal-transparent-portal-pixel-art-png-png-download (1).png" id="21_vqapr"]
-[ext_resource type="Script" uid="uid://uv46omxspqe2" path="res://portal-S6.gd" id="22_vqapr"]
+[ext_resource type="Script" path="res://portal-S6.gd" id="22_vqapr"]
+[ext_resource type="Script" uid="uid://ct0o08qbee2t0" path="res://area_2d_2.gd" id="23_h7pod"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sh78g"]
 texture = ExtResource("3_8yu36")
@@ -1096,14 +1097,18 @@ script/source = "extends HBoxContainer
 
 func _ready():
 	var stats = get_node(\"/root/PlayerStats\")
-	stats.health_changed.connect(update_hearts)
+
+	# Avoid duplicate connections
+	if not stats.health_changed.is_connected(update_hearts):
+		stats.health_changed.connect(update_hearts)
+
+	# Force UI to refresh on scene load
 	update_hearts()
 
 func update_hearts():
 	var stats = get_node(\"/root/PlayerStats\")
-	var heart_count = get_child_count()
 
-	for i in range(heart_count):
+	for i in range(get_child_count()):
 		get_child(i).visible = i < stats.health
 "
 
@@ -1159,6 +1164,9 @@ size = Vector2(13.888908, 34.72235)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4kwmw"]
 radius = 121.84491
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyvij"]
+size = Vector2(55386.344, 347.45703)
 
 [node name="Node2D" type="Node2D"]
 
@@ -1915,6 +1923,16 @@ script = ExtResource("22_vqapr")
 rotation = 1.5707964
 scale = Vector2(1.2771642, -0.54447174)
 shape = SubResource("CircleShape2D_4kwmw")
+
+[node name="WorldBarrier" type="Area2D" parent="Sprite2D2/Area2D/CollisionShape2D"]
+position = Vector2(-1039.9875, 59.999275)
+script = ExtResource("23_h7pod")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/Area2D/CollisionShape2D/WorldBarrier"]
+position = Vector2(-1533.5952, 18029.127)
+rotation = 1.5730846
+scale = Vector2(0.9999999, 0.99999994)
+shape = SubResource("RectangleShape2D_gyvij")
 
 [connection signal="area_entered" from="TileMapLayer2/Killbody/Area2D4D" to="TileMapLayer2/Killbody/Area2D4D" method="_on_area_entered"]
 [connection signal="area_entered" from="Player/Area2D_coin" to="Player" method="_on_area_2d_coin_area_entered"]
