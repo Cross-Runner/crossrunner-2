@@ -876,9 +876,8 @@ script = ExtResource("1_2gvwi")
 position = Vector2(269.00003, -39.000004)
 scale = Vector2(0.71313936, 0.7679686)
 sprite_frames = SubResource("SpriteFrames_h5xi8")
-animation = &"new_animation_1"
+animation = &"new_animation"
 autoplay = "default"
-frame_progress = 0.16988163
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossCharacter"]
 position = Vector2(265, -38)
