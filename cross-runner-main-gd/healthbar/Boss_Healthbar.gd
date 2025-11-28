@@ -2,14 +2,16 @@ extends ProgressBar
 
 
 @onready var timer = $Timer
-@onready var damage_bar = $DamageBar
-
+#@onready var damage_bar = $DamageBar
+@export var damage_bar = Node 
 
 
 
 
 var health = 0 : set = _set_health
 
+func _ready() -> void:
+	print(damage_bar)
 
 func _set_health	(new_health):
 	var prev_health = health

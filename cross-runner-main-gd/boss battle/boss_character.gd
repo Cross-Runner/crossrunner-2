@@ -3,7 +3,7 @@ extends CharacterBody2D
 var health = 1 # Initial health
 
 
-@onready var healthbar = $Healthbar
+@onready var healthbar = $"../Healthbar"
 
 func _ready():
 	# Assuming you fixed the node name to $Hurtbox from the previous issues
@@ -11,6 +11,7 @@ func _ready():
 	# Change the 6 to your desired starting health (e.g., 100)
 	health = 3
 	healthbar.init_health(health)
+
 
 	
 	
@@ -35,9 +36,8 @@ func die():
 	# You would usually add animations or effects here before removing the boss
 	queue_free() # Removes the boss node from the scene
 	
-	
 func _set_health(value):
-	health = value   # <--- This replaces the red line
+		health = value   # <--- This replaces the red line
 	
-	if health <= 0: # I removed 'and is_alive' to keep it simple
-		die()	
+		if health <= 0: # I removed 'and is_alive' to keep it simple
+			die()
