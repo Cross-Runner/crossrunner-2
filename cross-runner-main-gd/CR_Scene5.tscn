@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=4 uid="uid://c5mtwyuf0emhx"]
+[gd_scene load_steps=89 format=4 uid="uid://c5mtwyuf0emhx"]
 
 [ext_resource type="Texture2D" uid="uid://ql2okrshffpq" path="res://Resources/Final/Background_0.png" id="1_dwen6"]
 [ext_resource type="Texture2D" uid="uid://r1kaybxap2v3" path="res://Resources/Final/Grass_background_1.png" id="2_16sqb"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cc4wv7g5o8ncy" path="res://Resources/NES - Faxanadu - Miscellaneous - NPCs.png" id="21_8go4l"]
 [ext_resource type="Script" uid="uid://djhnyxsyj2g40" path="res://hurtbox.gd" id="22_fg8l5"]
 [ext_resource type="Script" uid="uid://ct0o08qbee2t0" path="res://area_2d_2.gd" id="23_8go4l"]
+[ext_resource type="Script" uid="uid://bqm4uviryh6g8" path="res://leonidas.gd" id="24_fg8l5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5mhhf"]
 radius = 121.84491
@@ -1235,6 +1236,37 @@ script = ExtResource("23_8go4l")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="coin3/Worldbarrier"]
 position = Vector2(2624.968, 1824.978)
 shape = SubResource("RectangleShape2D_fg8l5")
+
+[node name="Notouch" type="CanvasLayer" parent="."]
+
+[node name="Leonidas" type="Control" parent="Notouch"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("24_fg8l5")
+
+[node name="Shield" type="Panel" parent="Notouch/Leonidas"]
+layout_mode = 0
+offset_left = 529.0
+offset_top = 72.0
+offset_right = 1768.0
+offset_bottom = 1186.0
+
+[node name="WarCouncil" type="VBoxContainer" parent="Notouch/Leonidas/Shield"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WingsOfHermes" type="Button" parent="Notouch/Leonidas/Shield/WarCouncil"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "WingsOfHermes"
+
+[node name="Ambrosia" type="Button" parent="Notouch/Leonidas/Shield/WarCouncil"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Ambrosia"
 
 [connection signal="area_entered" from="BACKGROUND/Killbody/Area2D4D" to="BACKGROUND/Killbody/Area2D4D" method="_on_area_entered"]
 [connection signal="area_entered" from="Player/Area2D_coin" to="Player" method="_on_area_2d_coin_area_entered"]

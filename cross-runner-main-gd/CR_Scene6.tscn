@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=4 uid="uid://bccf20ntbuwlr"]
+[gd_scene load_steps=90 format=4 uid="uid://bccf20ntbuwlr"]
 
 [ext_resource type="Texture2D" uid="uid://ql2okrshffpq" path="res://Resources/Final/Background_0.png" id="1_ix0s0"]
 [ext_resource type="Texture2D" uid="uid://r1kaybxap2v3" path="res://Resources/Final/Grass_background_1.png" id="2_6jpsn"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://lbhnhc3yjxd4" path="res://Resources/Final/113-1139407_portal-transparent-portal-pixel-art-png-png-download (1).png" id="21_vqapr"]
 [ext_resource type="Script" path="res://portal-S6.gd" id="22_vqapr"]
 [ext_resource type="Script" uid="uid://ct0o08qbee2t0" path="res://area_2d_2.gd" id="23_h7pod"]
+[ext_resource type="Script" uid="uid://bqm4uviryh6g8" path="res://leonidas.gd" id="24_4kwmw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sh78g"]
 texture = ExtResource("3_8yu36")
@@ -1933,6 +1934,37 @@ position = Vector2(-1533.5952, 18029.127)
 rotation = 1.5730846
 scale = Vector2(0.9999999, 0.99999994)
 shape = SubResource("RectangleShape2D_gyvij")
+
+[node name="Notouch" type="CanvasLayer" parent="."]
+
+[node name="Leonidas" type="Control" parent="Notouch"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("24_4kwmw")
+
+[node name="Shield" type="Panel" parent="Notouch/Leonidas"]
+layout_mode = 0
+offset_left = 529.0
+offset_top = 72.0
+offset_right = 1768.0
+offset_bottom = 1186.0
+
+[node name="WarCouncil" type="VBoxContainer" parent="Notouch/Leonidas/Shield"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WingsOfHermes" type="Button" parent="Notouch/Leonidas/Shield/WarCouncil"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "WingsOfHermes"
+
+[node name="Ambrosia" type="Button" parent="Notouch/Leonidas/Shield/WarCouncil"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Ambrosia"
 
 [connection signal="area_entered" from="TileMapLayer2/Killbody/Area2D4D" to="TileMapLayer2/Killbody/Area2D4D" method="_on_area_entered"]
 [connection signal="area_entered" from="Player/Area2D_coin" to="Player" method="_on_area_2d_coin_area_entered"]

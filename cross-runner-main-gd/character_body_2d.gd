@@ -6,12 +6,16 @@ const JUMP_VELOCITY = -200.0
 const MAX_JUMPS = 2
 var jumps_left = MAX_JUMPS
 
+var blessing_of_ares := false
+func set_fly_mode(state: bool) -> void:
+	blessing_of_ares = state
+
+
 @onready var anim = $AnimatedSprite2D
 @onready var coin_label = %Label
 @onready var sfx_jump: AudioStreamPlayer2D = $sfx_jump
 @onready var sfx_attack: AudioStreamPlayer2D = $sfx_attack
 @onready var sfx_coin: AudioStreamPlayer2D = $sfx_coin
-
 
 # Attack hitbox
 @onready var attack_hitbox = $AttackHitbox
@@ -20,13 +24,19 @@ var jumps_left = MAX_JUMPS
 var is_attacking = false
 var coin_counter = 0
 
-func _physics_process(delta: float) -> void:
-	# Gravity
-	if not is_on_floor():
-		velocity += get_gravity() * delta
 
-	# Reset jumps when grounded
-	if is_on_floor():
+func _ready():
+	# REQUIRED so Leonidas can find the player
+	add_to_group("player")
+
+
+func _physics_process(delta: float) -> void:
+
+	# Gravity (fixed indentation bug)
+	if not is_on_floor():
+		if not blessing_of_ares:
+			velocity += get_gravity() * delta
+	else:
 		jumps_left = MAX_JUMPS
 
 	# Attack
@@ -48,15 +58,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 		anim.flip_h = direction < 0
 
-		if is_on_floor() and not is_attacking:
-			if anim.animation != "walk":
-				anim.play("walk")
+		if is_on_floor() and not is_attacking and anim.animation != "walk":
+			anim.play("walk")
+
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-		if is_on_floor() and not is_attacking:
-			if anim.animation != "idle":
-				anim.play("idle")
+		if is_on_floor() and not is_attacking and anim.animation != "idle":
+			anim.play("idle")
 
 	move_and_slide()
 
@@ -85,7 +94,6 @@ func _on_area_2d_coin_area_entered(area: Area2D) -> void:
 	if area.is_in_group("coin"):
 		sfx_coin.play()
 		set_coin(coin_counter + 1)
-		print(coin_counter)
 
 
 func set_coin(new_coin_count: int) -> void:
