@@ -867,7 +867,7 @@ position = Vector2(-0.42965862, -13.856077)
 sprite_frames = SubResource("SpriteFrames_iht1c")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.13963664
+frame_progress = 0.3067262
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player in lobby"]
 position = Vector2(4.464304, -0.8927939)

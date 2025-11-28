@@ -5,6 +5,9 @@ extends ProgressBar
 @onready var damage_bar = $DamageBar
 
 
+
+
+
 var health = 0 : set = _set_health
 
 
@@ -13,7 +16,7 @@ func _set_health	(new_health):
 	health = min(max_value, new_health)
 	value = health
 	
-	if health <= 0:
+	if health <= 0:	
 		queue_free()
 		
 	if health < prev_health:
