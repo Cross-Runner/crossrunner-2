@@ -1228,12 +1228,12 @@ shape = SubResource("RectangleShape2D_gt1uo")
 position = Vector2(223.00003, 988)
 scale = Vector2(0.20000243, 0.20000243)
 
-[node name="Area2D2" type="Area2D" parent="coin3"]
+[node name="Worldbarrier" type="Area2D" parent="coin3"]
 position = Vector2(-1039.9875, 59.999275)
 script = ExtResource("23_8go4l")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="coin3/Area2D2"]
-position = Vector2(2622.4692, 1823.0005)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coin3/Worldbarrier"]
+position = Vector2(2624.968, 1824.978)
 shape = SubResource("RectangleShape2D_fg8l5")
 
 [connection signal="area_entered" from="BACKGROUND/Killbody/Area2D4D" to="BACKGROUND/Killbody/Area2D4D" method="_on_area_entered"]

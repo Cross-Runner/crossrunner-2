@@ -1097,14 +1097,18 @@ script/source = "extends HBoxContainer
 
 func _ready():
 	var stats = get_node(\"/root/PlayerStats\")
-	stats.health_changed.connect(update_hearts)
+
+	# Avoid duplicate connections
+	if not stats.health_changed.is_connected(update_hearts):
+		stats.health_changed.connect(update_hearts)
+
+	# Force UI to refresh on scene load
 	update_hearts()
 
 func update_hearts():
 	var stats = get_node(\"/root/PlayerStats\")
-	var heart_count = get_child_count()
 
-	for i in range(heart_count):
+	for i in range(get_child_count()):
 		get_child(i).visible = i < stats.health
 "
 
@@ -1920,11 +1924,11 @@ rotation = 1.5707964
 scale = Vector2(1.2771642, -0.54447174)
 shape = SubResource("CircleShape2D_4kwmw")
 
-[node name="Area2D2" type="Area2D" parent="Sprite2D2/Area2D/CollisionShape2D"]
+[node name="WorldBarrier" type="Area2D" parent="Sprite2D2/Area2D/CollisionShape2D"]
 position = Vector2(-1039.9875, 59.999275)
 script = ExtResource("23_h7pod")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/Area2D/CollisionShape2D/Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/Area2D/CollisionShape2D/WorldBarrier"]
 position = Vector2(-1533.5952, 18029.127)
 rotation = 1.5730846
 scale = Vector2(0.9999999, 0.99999994)

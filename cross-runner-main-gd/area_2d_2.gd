@@ -1,15 +1,28 @@
 extends Area2D
 
-@export var kill_layer: int = 1  # Set this to your player collision layer
+@export var level1_scene: String = "res://CR_Scene4.tscn"
 
-func _on_body_entered(body):
-	# Check if the object is on the kill layer
-	if body.collision_layer & (1 << (kill_layer - 1)):
-		kill(body)
+var triggered := false
 
-func kill(body):
-	if body.has_method("die"):
-		body.die()
-	else:
-		# Fallback if no die() function exists
-		body.queue_free()
+func _ready():
+	body_entered.connect(_on_body_entered)
+
+func _on_body_entered(body: Node):
+	if triggered:
+		return
+
+	if body.is_in_group("player"):
+		triggered = true
+
+		var stats = get_node("/root/PlayerStats")
+
+		# Kill player
+		stats.health = 0
+		stats.health_changed.emit()
+
+		await get_tree().create_timer(0.05).timeout
+
+		# Reset BEFORE changing scene
+		stats.reset()
+
+		get_tree().change_scene_to_file(level1_scene)
