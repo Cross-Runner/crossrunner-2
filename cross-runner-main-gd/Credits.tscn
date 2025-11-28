@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://dfmoynxt51l0y" path="res://snow.gd" id="6_s70hm"]
 [ext_resource type="Script" uid="uid://iauc8nnvga8d" path="res://goback.gd" id="8_6hb5c"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_filter = 1
