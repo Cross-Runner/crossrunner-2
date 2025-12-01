@@ -137,3 +137,10 @@ func die() -> void:
 	print("Player has died.")
 	# The actual death action:
 	get_tree().reload_current_scene() 
+
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	position += Vector2(400, 0)
+	if body.name == "portalGREEN":
+		pass

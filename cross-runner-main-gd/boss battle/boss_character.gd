@@ -41,3 +41,8 @@ func _set_health(value):
 	
 		if health <= 0: # I removed 'and is_alive' to keep it simple
 			die()
+			
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	position.x = 100

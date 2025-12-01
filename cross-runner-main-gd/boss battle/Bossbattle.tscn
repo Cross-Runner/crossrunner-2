@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=4 uid="uid://diwdfyykp7sxb"]
+[gd_scene load_steps=112 format=4 uid="uid://diwdfyykp7sxb"]
 
 [ext_resource type="Script" uid="uid://xe0edrfw1jpx" path="res://boss battle/boss_character.gd" id="1_2gvwi"]
 [ext_resource type="Texture2D" uid="uid://3wg4ue1a0oxy" path="res://boss battle/idle_1.png" id="1_oawp3"]
@@ -51,6 +51,13 @@
 [ext_resource type="Texture2D" uid="uid://bf8ecgarnybrw" path="res://FREE_Samurai 2D Pixel Art v1.2/Sprites/HURT.png" id="47_2gvwi"]
 [ext_resource type="Texture2D" uid="uid://bfwqdqbyfs8qk" path="res://FREE_Samurai 2D Pixel Art v1.2/Sprites/IDLE.png" id="48_fokhc"]
 [ext_resource type="Texture2D" uid="uid://bujs3nind3v03" path="res://FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png" id="49_2hasp"]
+[ext_resource type="Script" uid="uid://copovhfy5nbpy" path="res://boss battle/collision_shape_2d.gd" id="51_euh5t"]
+[ext_resource type="Script" uid="uid://c24ulin6uq2ow" path="res://enemy.gd" id="52_aafso"]
+[ext_resource type="Texture2D" uid="uid://cc4wv7g5o8ncy" path="res://Resources/NES - Faxanadu - Miscellaneous - NPCs.png" id="53_euh5t"]
+[ext_resource type="Script" uid="uid://djhnyxsyj2g40" path="res://hurtbox.gd" id="54_85puo"]
+[ext_resource type="Texture2D" uid="uid://lbhnhc3yjxd4" path="res://Resources/Final/113-1139407_portal-transparent-portal-pixel-art-png-png-download (1).png" id="55_1da82"]
+[ext_resource type="Script" uid="uid://d2odl3gk4nona" path="res://area_2d.gd" id="56_b1ytx"]
+[ext_resource type="Script" uid="uid://lhb78tf2fsa0" path="res://boss battle/portalBack.gd" id="58_85puo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xd72a"]
 atlas = ExtResource("17_lii25")
@@ -602,7 +609,7 @@ texture = ExtResource("17_ihck0")
 sources/0 = SubResource("TileSetAtlasSource_odrhd")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lii25"]
-size = Vector2(423, 14)
+size = Vector2(477, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2u05p"]
 atlas = ExtResource("46_xrsnh")
@@ -867,6 +874,52 @@ size = Vector2(19.6131, 23.095245)
 [sub_resource type="CircleShape2D" id="CircleShape2D_2gvwi"]
 radius = 17.999992
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxcha"]
+atlas = ExtResource("53_euh5t")
+region = Rect2(7, 814, 19, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh24r"]
+atlas = ExtResource("53_euh5t")
+region = Rect2(26, 814, 19, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul7y6"]
+atlas = ExtResource("53_euh5t")
+region = Rect2(45, 814, 19, 35)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lw2xp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxcha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh24r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul7y6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_07x4q"]
+radius = 6.0
+height = 33.333496
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7bb6"]
+size = Vector2(12, 27.222351)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fngvk"]
+size = Vector2(13.888908, 34.72235)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ioq1"]
+radius = 121.84491
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1da82"]
+radius = 6.0
+height = 38.0
+
 [node name="Node2D" type="Node2D"]
 
 [node name="BossCharacter" type="CharacterBody2D" parent="."]
@@ -894,13 +947,13 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossCharacter/Hurtbox"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAACAAAAAAAIAAEAAAADAAAAAAAIAAEAAAAEAAAAAAAIAAEAAAAFAAAAAAAIAAEAAAAGAAAAAAAIAAEAAAAHAAAAAAAIAAEAAAAIAAAAAAAIAAEAAAAJAAAAAAAIAAEAAAAKAAAAAAAIAAEAAAALAAAAAAAIAAEAAAAMAAAAAAAIAAEAAAANAAAAAAAIAAEAAAAOAAAAAAAIAAEAAAAPAAAAAAAIAAEAAAAQAAAAAAAIAAEAAAARAAAAAAAIAAEAAAASAAAAAAAIAAEAAAATAAAAAAAIAAEAAAAVAAAAAAAIAAEAAAAWAAAAAAAIAAEAAAAXAAAAAAAIAAEAAAAYAAAAAAAIAAEAAAAZAAAAAAAIAAEAAAAaAAAAAAAIAAEAAAAUAAAAAAAIAAEAAAAbAAAAAAAIAAEAAAAcAAAAAAAIAAEAAAADAAEAAAADAAMAAAAEAAEAAAADAAMAAAAFAAEAAAADAAMAAAAGAAEAAAADAAMAAAAHAAEAAAADAAMAAAAIAAEAAAADAAMAAAAJAAEAAAADAAMAAAAKAAEAAAADAAMAAAALAAEAAAADAAMAAAAMAAEAAAADAAMAAAANAAEAAAADAAMAAAAOAAEAAAADAAMAAAAPAAEAAAADAAMAAAAQAAEAAAADAAMAAAARAAEAAAADAAMAAAASAAEAAAADAAMAAAATAAEAAAADAAMAAAAUAAEAAAADAAMAAAAVAAEAAAADAAMAAAAWAAEAAAADAAMAAAAXAAEAAAADAAMAAAAYAAEAAAADAAMAAAAbAAEAAAADAAMAAAAaAAEAAAADAAMAAAAZAAEAAAADAAMAAAAcAAEAAAAHAAMAAAACAAEAAAACAAMAAAA=")
+tile_map_data = PackedByteArray("AAACAAAAAAAIAAEAAAADAAAAAAAIAAEAAAAEAAAAAAAIAAEAAAAFAAAAAAAIAAEAAAAGAAAAAAAIAAEAAAAHAAAAAAAIAAEAAAAIAAAAAAAIAAEAAAAJAAAAAAAIAAEAAAAKAAAAAAAIAAEAAAALAAAAAAAIAAEAAAAMAAAAAAAIAAEAAAANAAAAAAAIAAEAAAAOAAAAAAAIAAEAAAAPAAAAAAAIAAEAAAAQAAAAAAAIAAEAAAARAAAAAAAIAAEAAAASAAAAAAAIAAEAAAATAAAAAAAIAAEAAAAVAAAAAAAIAAEAAAAWAAAAAAAIAAEAAAAXAAAAAAAIAAEAAAAYAAAAAAAIAAEAAAAZAAAAAAAIAAEAAAAaAAAAAAAIAAEAAAAUAAAAAAAIAAEAAAAbAAAAAAAIAAEAAAAcAAAAAAAIAAEAAAADAAEAAAADAAMAAAAEAAEAAAADAAMAAAAFAAEAAAADAAMAAAAGAAEAAAADAAMAAAAHAAEAAAADAAMAAAAIAAEAAAADAAMAAAAJAAEAAAADAAMAAAAKAAEAAAADAAMAAAALAAEAAAADAAMAAAAMAAEAAAADAAMAAAANAAEAAAADAAMAAAAOAAEAAAADAAMAAAAPAAEAAAADAAMAAAAQAAEAAAADAAMAAAARAAEAAAADAAMAAAASAAEAAAADAAMAAAATAAEAAAADAAMAAAAUAAEAAAADAAMAAAAVAAEAAAADAAMAAAAWAAEAAAADAAMAAAAXAAEAAAADAAMAAAAYAAEAAAADAAMAAAAbAAEAAAADAAMAAAAaAAEAAAADAAMAAAAZAAEAAAADAAMAAAAcAAEAAAAHAAMAAAACAAEAAAAEAAMAAAABAAEAAAAEAAMAAAAAAAEAAAAEAAMAAAD//wEAAAAEAAMAAAABAAAAAAAJAAEAAAAAAAAAAAAJAAEAAAD//wAAAAAJAAEAAAA=")
 tile_set = SubResource("TileSet_bo3pb")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="TileMapLayer"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/StaticBody2D"]
-position = Vector2(250.5, 22)
+position = Vector2(223.5, 22)
 shape = SubResource("RectangleShape2D_lii25")
 
 [node name="DeathTimer" type="Timer" parent="TileMapLayer"]
@@ -947,6 +1000,7 @@ rotation = -0.06617166
 scale = Vector2(1.7506297, 1.0412891)
 shape = SubResource("CircleShape2D_2gvwi")
 disabled = true
+script = ExtResource("51_euh5t")
 
 [node name="Healthbar" parent="." instance=ExtResource("44_xrsnh")]
 offset_left = 147.0
@@ -954,4 +1008,68 @@ offset_top = -116.0
 offset_right = 387.0
 offset_bottom = -111.0
 
+[node name="enemy" type="CharacterBody2D" parent="."]
+position = Vector2(1997.9999, 977.99994)
+scale = Vector2(0.72, 0.72)
+script = ExtResource("52_aafso")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy"]
+texture_filter = 1
+position = Vector2(-2068.0554, -1137.5)
+scale = Vector2(6.4268947, 4.2380977)
+sprite_frames = SubResource("SpriteFrames_lw2xp")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
+position = Vector2(-19.444275, 8.333419)
+shape = SubResource("CapsuleShape2D_07x4q")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy"]
+position = Vector2(23.611355, -1.3888345)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_b7bb6")
+
+[node name="Hurtbox" type="Area2D" parent="enemy"]
+script = ExtResource("54_85puo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/Hurtbox"]
+position = Vector2(-38.888718, -9.722151)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_fngvk")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-1.2165833, -10.2576)
+scale = Vector2(0.24710801, 0.16053474)
+texture = ExtResource("55_1da82")
+region_enabled = true
+region_rect = Rect2(433, 40, 196, 383)
+
+[node name="Area2D" type="Area2D" parent="Sprite2D3"]
+script = ExtResource("56_b1ytx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D3/Area2D"]
+position = Vector2(-144.80879, 1.6046376)
+rotation = 1.5707964
+scale = Vector2(1.2771642, -0.54447174)
+shape = SubResource("CircleShape2D_3ioq1")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-2315, -1008)
+script = ExtResource("58_85puo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2761, 998)
+shape = SubResource("CapsuleShape2D_1da82")
+
+[node name="PortalGREEN" type="Sprite2D" parent="Area2D"]
+position = Vector2(2760.0002, 998.99994)
+scale = Vector2(0.114102535, 0.11410251)
+texture = ExtResource("55_1da82")
+region_enabled = true
+region_rect = Rect2(433, 40, 196, 383)
+
 [connection signal="timeout" from="TileMapLayer/DeathTimer" to="Player4Boss" method="_on_death_timer_timeout"]
+[connection signal="area_entered" from="enemy/Hurtbox" to="enemy" method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="Sprite2D3/Area2D" to="Player4Boss" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Sprite2D3/Area2D" to="Player4Boss" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
